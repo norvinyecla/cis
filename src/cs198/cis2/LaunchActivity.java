@@ -16,7 +16,6 @@ public class LaunchActivity extends Activity {
         setContentView(R.layout.activity_launch);
         continueButton =  (Button) findViewById(R.id.button1);
         this.continueButton.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View v) {
             	Intent myIntent = new Intent(LaunchActivity.this, IdentifyActivity.class);
             	LaunchActivity.this.startActivity(myIntent);

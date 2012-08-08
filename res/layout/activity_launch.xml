@@ -12,7 +12,6 @@
         android:text="Continue" 
         android:onClick="IdentifyActivity"
         tools:context=".LaunchActivity" />
-        />
         
 
 </RelativeLayout>

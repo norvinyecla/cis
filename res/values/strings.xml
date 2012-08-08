@@ -6,5 +6,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_identify">MainActivity</string>
     <string name="title_activity_launch">MainActivity</string>
+    
+    <string-array name="confidence_lvl">
+        <item >50% sure</item>
+        <item >75% sure</item>
+        <item >100% sure</item>
+    </string-array>
 
 </resources>
