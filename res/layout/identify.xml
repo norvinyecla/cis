@@ -16,13 +16,10 @@
             android:orientation="vertical" >
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:maxHeight="150px"
-        android:maxWidth="150px"
-        android:contentDescription="TODO"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:scaleType="fitCenter"
          />
 
     <TextView
@@ -74,32 +71,10 @@
         android:layout_below="@+id/radioGroup1"
         android:text="How sure are you?" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2" >
-
-        <RadioButton
-            android:id="@+id/radio4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="100% sure" />
-
-        <RadioButton
-            android:id="@+id/radio5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="75% sure" />
-
-        <RadioButton
-            android:id="@+id/radio6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="50% sure" />
-    </RadioGroup>
+    <Spinner
+    android:id="@+id/spinner1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button1"
