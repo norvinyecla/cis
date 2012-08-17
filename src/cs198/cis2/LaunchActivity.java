@@ -17,7 +17,7 @@ public class LaunchActivity extends Activity {
         continueButton =  (Button) findViewById(R.id.button1);
         this.continueButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-            	Intent myIntent = new Intent(LaunchActivity.this, IdentifyActivity.class);
+            	Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
             	LaunchActivity.this.startActivity(myIntent);
             }
           });
