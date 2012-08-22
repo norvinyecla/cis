@@ -27,7 +27,9 @@ public class Passcode extends Activity {
 	            	Passcode.this.startActivity(myIntent);
 	            	Passcode.this.finish();
             	}
-            	else (Toast.makeText(Passcode.this, "You entered the wrong code!", Toast.LENGTH_SHORT)).show();
+            	else {(Toast.makeText(Passcode.this, "You entered the wrong code!", Toast.LENGTH_SHORT)).show();
+            		mEdit.setText("");
+            	}
             }
           });
     }
