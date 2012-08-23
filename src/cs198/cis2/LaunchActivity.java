@@ -1,10 +1,15 @@
 package cs198.cis2;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +20,7 @@ public class LaunchActivity extends Activity {
 	private Button continueButton;
 	private  EditText emailfield;
 	private EditText passwordfield;
+	private FileStatsDataSource datasource;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,7 @@ public class LaunchActivity extends Activity {
             	//String email = emailfield.getText().toString();
             	//String password = passwordfield.getText().toString(); //getPasswordfield().getText().toString();
             	Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
+            	
             	LaunchActivity.this.startActivity(myIntent);
             	LaunchActivity.this.finish();
             }
@@ -34,8 +41,42 @@ public class LaunchActivity extends Activity {
         createLocalRecord();
     }
     
-    private void createLocalRecord(){
+    public void createLocalRecord(){
+    	FileStats fileStats = new FileStats();
+    	
+    	datasource = new FileStatsDataSource(this);
+        datasource.open();
+
+        List<FileStats> values = datasource.getAllFileStats();
+
+        
     	
     }
+    
+    class OnlyExt implements FilenameFilter{
+	  String ext;   	 
+	  public OnlyExt(String ext){
+			 this.ext="." + ext;
+	  }
+	  
+	  public boolean accept(File dir,String name){
+		  return name.endsWith(ext);
+	  }
+	}
+		
+	public class FilterFiles{
+		  
+		public String[] main(String args[]) throws IOException{
+		
+		String dir = "\\mnt\\sdcard";
+		String extn = "jpg";
+		File f = new File(dir);
+		FilenameFilter ff = new OnlyExt(extn);
+		String s[] = f.list(ff);
+		return s;
+		}
+
+  }
+
     
 }

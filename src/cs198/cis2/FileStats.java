@@ -2,8 +2,10 @@ package cs198.cis2;
 
 public class FileStats {
 	  private long id;
+	  private String filename;
 	  private String type;
 	  private String conf;
+	  
 	  public long getId() {
 	    return id;
 	  }
@@ -12,6 +14,14 @@ public class FileStats {
 	    this.id = id;
 	  }
 
+	  public String getFileName() {
+	    return filename;
+	  }
+
+	  public void setFileName(String f) {
+	    this.filename = f;
+	  }
+	  
 	  public String getType() {
 	    return type;
 	  }
