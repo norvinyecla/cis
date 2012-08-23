@@ -1,20 +1,18 @@
 package cs198.cis2;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LaunchActivity extends Activity {
 	private Button continueButton;
@@ -38,37 +36,46 @@ public class LaunchActivity extends Activity {
             	LaunchActivity.this.finish();
             }
           });
-        createLocalRecord();
-    }
-    
-    public void createLocalRecord(){
-    	FileStats fileStats = new FileStats();
-    	
+        String[] filenames = {};
+
     	datasource = new FileStatsDataSource(this);
         datasource.open();
 
-        List<FileStats> values = datasource.getAllFileStats();
-
+        FilterFiles myFilter = new FilterFiles();
+        try {
+			filenames = myFilter.filter();
+			Toast.makeText(getApplicationContext(), "number of files ="+filenames.length, Toast.LENGTH_LONG).show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
         
-    	
+        
     }
     
+    
     class OnlyExt implements FilenameFilter{
-	  String ext;   	 
-	  public OnlyExt(String ext){
-			 this.ext="." + ext;
+	  String extn;   	 
+	  File dir;
+	  public OnlyExt(String extn){
+			 this.extn="." + extn;
+	  }
+	  
+	  public void setDir(File dir){
+		  this.dir = dir;		  
 	  }
 	  
 	  public boolean accept(File dir,String name){
-		  return name.endsWith(ext);
+		  return name.endsWith(extn);
 	  }
 	}
 		
 	public class FilterFiles{
 		  
-		public String[] main(String args[]) throws IOException{
+		public String[] filter() throws IOException{
 		
-		String dir = "\\mnt\\sdcard";
+		String dir = Environment.getExternalStorageDirectory().toString();
 		String extn = "jpg";
 		File f = new File(dir);
 		FilenameFilter ff = new OnlyExt(extn);

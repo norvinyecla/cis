@@ -20,7 +20,7 @@ public class Passcode extends Activity {
         q.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	EditText mEdit = (EditText) findViewById(R.id.PasscodeBox);
-            	Toast.makeText(Passcode.this, mEdit.getText().toString(), Toast.LENGTH_SHORT).show();
+            	
             	if (mEdit.getText().toString().equals(PINCODE) ){
             		Toast.makeText(Passcode.this, "You entered the correct code!", Toast.LENGTH_SHORT).show();
 	            	Intent myIntent = new Intent(Passcode.this, IdentifyActivity.class);
