@@ -38,20 +38,21 @@ import android.database.sqlite.SQLiteDatabase;
 	    dbHelper.close();
 	  }
 	
-	  public FileStats createStat(String filename) {
+	  public FileStats createFileStat(String filename) {
 	    ContentValues values = new ContentValues();
-	    values.put(MySQLiteHelper.COLUMN_TYPE, filename);
+	    values.put(MySQLiteHelper.COLUMN_FILENAME, filename);
+	    values.put(MySQLiteHelper.COLUMN_TYPE, "");
+	    values.put(MySQLiteHelper.COLUMN_CONF, "");
 	    /*
 	String where = "id=?";
 	String[] whereArgs = {id.toString()};
 	
 	db.update(DATABASE_TABLE, dataToInsert, where, whereArgs);
 	*/
-	long insertId = database.insert(MySQLiteHelper.TABLE_FILESTATS, null,
+	    long insertId = database.insert(MySQLiteHelper.TABLE_FILESTATS, null,
 	    values);
-	Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS,
-	    allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
-	        null, null, null);
+	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS,
+	    allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
 	    cursor.moveToFirst();
 	    FileStats newFileStat = cursorToFileStats(cursor);
 	    cursor.close();

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,13 @@ public class LaunchActivity extends Activity {
 			e.printStackTrace();
 			
 		}
+        
+        int n = filenames.length;
+        int ctr = 0;
+        for (ctr = 0; ctr < n; ctr++){
+        	datasource.createFileStat(filenames[ctr]);
+        }
+        datasource.close();
         
         
     }
