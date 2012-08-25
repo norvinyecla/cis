@@ -1,5 +1,7 @@
 package cs198.cis2;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +12,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Passcode extends Activity {
-	
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.passcode);
         final String PINCODE = "1000";
+        
+        
         Button q = (Button) findViewById(R.id.PasscodeButton);
         q.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -23,7 +28,9 @@ public class Passcode extends Activity {
             	
             	if (mEdit.getText().toString().equals(PINCODE) ){
             		Toast.makeText(Passcode.this, "You entered the correct code!", Toast.LENGTH_SHORT).show();
+            		           		
 	            	Intent myIntent = new Intent(Passcode.this, IdentifyActivity.class);
+	            	//myIntent.putExtra("statnumber",fid);
 	            	Passcode.this.startActivity(myIntent);
 	            	Passcode.this.finish();
             	}

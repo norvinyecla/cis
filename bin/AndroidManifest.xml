@@ -19,6 +19,7 @@
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,10 +27,15 @@
             android:name=".IdentifyActivity"
             android:label="@string/title_activity_identify" >
         </activity>
-        
         <activity
             android:name=".Passcode"
             android:label="@string/title_activity_passcode" >
+        </activity>
+        <activity
+            android:name=".CsvActivity"
+            android:label="@string/title_activity_csv" >
+            <intent-filter>
+            </intent-filter>
         </activity>
     </application>
 

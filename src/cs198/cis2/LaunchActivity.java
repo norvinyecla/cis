@@ -27,18 +27,10 @@ public class LaunchActivity extends Activity {
         continueButton =  (Button) findViewById(R.id.button1);
         emailfield = (EditText) findViewById(R.id.emailBox);
         passwordfield = ((EditText) findViewById(R.id.PasscodeBox));
-        this.continueButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-            	//String email = emailfield.getText().toString();
-            	//String password = passwordfield.getText().toString(); //getPasswordfield().getText().toString();
-            	Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
-            	
-            	LaunchActivity.this.startActivity(myIntent);
-            	LaunchActivity.this.finish();
-            }
-          });
+        
         String[] filenames = {};
-
+        FileStats f;
+        
     	datasource = new FileStatsDataSource(this);
         datasource.open();
 
@@ -51,12 +43,27 @@ public class LaunchActivity extends Activity {
 			e.printStackTrace();
 			
 		}
-        
-        int n = filenames.length;
-        int ctr = 0;
-        for (ctr = 0; ctr < n; ctr++){
-        	datasource.createFileStat(filenames[ctr]);
+        if (datasource.getAllFileStats().size() == 0){
+	        int n = filenames.length;
+	        int ctr = 0;
+	        for (ctr = 0; ctr < n; ctr++){
+	        	f = datasource.createFileStat(filenames[ctr]);
+	        }
         }
+        
+        
+        this.continueButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+            	//String email = emailfield.getText().toString();
+            	//String password = passwordfield.getText().toString(); //getPasswordfield().getText().toString();
+            	
+            	
+            	Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
+            	
+            	LaunchActivity.this.startActivity(myIntent);
+            	LaunchActivity.this.finish();
+            }
+          });
         datasource.close();
         
         

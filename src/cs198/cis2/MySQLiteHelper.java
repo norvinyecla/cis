@@ -19,16 +19,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   private static final String DATABASE_CREATE = "create table "
       + TABLE_FILESTATS + "(" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_FILENAME + " text unique not null, " + 
 		  COLUMN_TYPE + " text not null, "+ COLUMN_CONF + " text not null);";
-
+  private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "+TABLE_FILESTATS;
   public MySQLiteHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
   }
+  
 
   @Override
   public void onCreate(SQLiteDatabase database) {
     database.execSQL(DATABASE_CREATE);
   }
 
+  public void drop(SQLiteDatabase database){
+	  database.execSQL(DATABASE_DROP);
+  }
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     Log.w(MySQLiteHelper.class.getName(),
@@ -38,4 +42,5 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     onCreate(db);
   }
 
+  
 } 

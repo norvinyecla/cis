@@ -37,18 +37,17 @@ import android.database.sqlite.SQLiteDatabase;
 	  public void close() {
 	    dbHelper.close();
 	  }
+	  
+	  public void drop(){
+		 dbHelper.drop(database);
+	  }
 	
 	  public FileStats createFileStat(String filename) {
 	    ContentValues values = new ContentValues();
 	    values.put(MySQLiteHelper.COLUMN_FILENAME, filename);
-	    values.put(MySQLiteHelper.COLUMN_TYPE, "");
-	    values.put(MySQLiteHelper.COLUMN_CONF, "");
-	    /*
-	String where = "id=?";
-	String[] whereArgs = {id.toString()};
-	
-	db.update(DATABASE_TABLE, dataToInsert, where, whereArgs);
-	*/
+	    values.put(MySQLiteHelper.COLUMN_TYPE, "none");
+	    values.put(MySQLiteHelper.COLUMN_CONF, "none");
+	    
 	    long insertId = database.insert(MySQLiteHelper.TABLE_FILESTATS, null,
 	    values);
 	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS,
@@ -73,7 +72,22 @@ import android.database.sqlite.SQLiteDatabase;
 	    System.out.println("Comment deleted with id: " + id);
 	    database.delete(MySQLiteHelper.TABLE_FILESTATS, MySQLiteHelper.COLUMN_ID   + " = " + id, null);
 	  }
-	
+	  
+	  public List<FileStats> getAllEmptyFileStats() {
+		  	List<FileStats> emptyfilestats = new ArrayList<FileStats>();
+		  	String db_query = "select * from "+ TABLE_FILESTATS + " where "+COLUMN_TYPE+" = ?";//and "+COLUMN_CONF+" = ?"; 
+		  	Cursor cursor = database.rawQuery(db_query, new String[] { "none" });
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+			  FileStats f = cursorToFileStats(cursor);
+			  emptyfilestats.add(f);
+			  cursor.moveToNext();
+			}
+			// Make sure to close the cursor
+			cursor.close();
+			return emptyfilestats;
+	  }
+	  
 	  public List<FileStats> getAllFileStats() {
 		  List<FileStats> filestats = new ArrayList<FileStats>();
 	

@@ -14,9 +14,11 @@
     </string-array>
 
     <string name="title_activity_passcode">Passcode</string>
-
     <string name="email">email</string>
-
     <string name="password">password</string>
+    <string name="title_activity_csvupload">CSVUpload</string>
+    <string name="congrats">You finished labelling a batch of photos!</string>
+    <string name="proceed">Proceed to Upload</string>
+    <string name="title_activity_csv">CsvActivity</string>
 
 </resources>
