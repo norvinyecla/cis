@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -16,32 +17,38 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LaunchActivity extends Activity {
+		
 	private Button continueButton;
 	private  EditText emailfield;
 	private EditText passwordfield;
 	private FileStatsDataSource datasource;
+	public static final String PREFS_NAME = "MyApp_Settings";
+	SharedPreferences settings;
+    FileStats f;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        continueButton =  (Button) findViewById(R.id.button1);
+        continueButton =  (Button) findViewById(R.id.FirstButton);
         emailfield = (EditText) findViewById(R.id.emailBox);
         passwordfield = ((EditText) findViewById(R.id.PasscodeBox));
         
         String[] filenames = {};
-        FileStats f;
-        
+
+
     	datasource = new FileStatsDataSource(this);
         datasource.open();
 
+        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        
         FilterFiles myFilter = new FilterFiles();
         try {
 			filenames = myFilter.filter();
-			Toast.makeText(getApplicationContext(), "number of files ="+filenames.length, Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "number of files="+filenames.length, Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+			e.printStackTrace();	
+
 		}
         if (datasource.getAllFileStats().size() == 0){
 	        int n = filenames.length;
@@ -50,16 +57,21 @@ public class LaunchActivity extends Activity {
 	        	f = datasource.createFileStat(filenames[ctr]);
 	        }
         }
+        else {
+        	datasource.drop();
+        }
         
         
         this.continueButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-            	//String email = emailfield.getText().toString();
+            	String email = emailfield.getText().toString();
             	//String password = passwordfield.getText().toString(); //getPasswordfield().getText().toString();
-            	
-            	
-            	Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
-            	
+            	// Writing data to SharedPreferences
+        		Editor editor = settings.edit();
+        		editor.putString("userid", email);
+        		editor.commit();
+        		
+        		Intent myIntent = new Intent(LaunchActivity.this, Passcode.class);
             	LaunchActivity.this.startActivity(myIntent);
             	LaunchActivity.this.finish();
             }
@@ -92,9 +104,9 @@ public class LaunchActivity extends Activity {
 		
 		String dir = Environment.getExternalStorageDirectory().toString();
 		String extn = "jpg";
-		File f = new File(dir);
-		FilenameFilter ff = new OnlyExt(extn);
-		String s[] = f.list(ff);
+		File ff = new File(dir);
+		FilenameFilter fff = new OnlyExt(extn);
+		String s[] = ff.list(fff);
 		return s;
 		}
 

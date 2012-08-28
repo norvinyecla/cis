@@ -25,6 +25,7 @@ public class CsvActivity extends Activity {
 	FileWriter fstream;
     BufferedWriter out ;
     private static final String DATABASE_NAME = "filestats.db";
+    public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_FILENAME = "filename";
 	public static final String COLUMN_TYPE = "type";
 	public static final String COLUMN_CONF = "conf";
@@ -44,8 +45,8 @@ public class CsvActivity extends Activity {
             	//File b = new File(Environment.getExternalStorageDirectory()+"/labels.csv");
             	getApplicationContext().deleteDatabase(DATABASE_NAME);
             	//b.delete();
-//            	Intent myIntent = new Intent(CsvActivity.this, .class);
-//            	CsvActivity.this.startActivity(myIntent);
+            	//Intent myIntent = new Intent(CsvActivity.this, .class);
+            	//CsvActivity.this.startActivity(myIntent);
             	CsvActivity.this.finish();
             }
           });
@@ -59,21 +60,24 @@ public class CsvActivity extends Activity {
 				e.printStackTrace();
 			}
         }
+        else {
+        	f.delete();
+        }
         
-        try{
-            // Create file 
-            fstream = new FileWriter(Environment.getExternalStorageDirectory()+"/labels.csv", false);
-            out = new BufferedWriter(fstream);
-            out.write("filename,type,conf\n");
-            //Close the output stream
-            out.close();
-            }catch (Exception e){//Catch exception if any
-              System.err.println("Error: " + e.getMessage());
-            }
-        
+//        try{
+//            // Create file 
+//            fstream = new FileWriter(Environment.getExternalStorageDirectory()+"/labels.csv", false);
+//            out = new BufferedWriter(fstream);
+//            out.write("filename,type,conf\n");
+//            //Close the output stream
+//            out.close();
+//            }catch (Exception e){//Catch exception if any
+//              System.err.println("Error: " + e.getMessage());
+//            }
+//        
         for (ctr = 0; ctr < cList.size(); ctr++){
         	FileStats f = cList.get(ctr);
-        	String line = f.getFileName()+","+f.getType()+","+f.getConf()+"\n";
+        	String line = f.getUserId()+","+f.getFileName()+","+f.getType()+","+f.getConf();
         	try {
         	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory()+"/labels.csv", true)));
         	    out.println(line);
@@ -81,16 +85,13 @@ public class CsvActivity extends Activity {
         	} catch (IOException e) {
         	    //oh noes!
         	}
-        	String path = Environment.getExternalStorageDirectory()+ "/" + f.getFileName();
-        	File a = new File(path);
-        	a.delete();
+//        	String path = Environment.getExternalStorageDirectory()+ "/" + f.getFileName();
+//        	File a = new File(path);
+//        	a.delete();
         }
         
         
     }
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.csv, menu);

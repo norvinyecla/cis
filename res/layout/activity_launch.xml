@@ -3,35 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="159dp"
-        android:onClick="IdentifyActivity"
-        android:text="Login"
-        tools:context=".Passcode" />
-
     <EditText
         android:id="@+id/PasswordBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp"
+        android:layout_marginTop="82dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/password" />
+        android:text="@string/password" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/emailBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/PasswordBox"
         android:layout_alignLeft="@+id/PasswordBox"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/FirstButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PasswordBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:onClick="IdentifyActivity"
+        android:text="Login"
+        tools:context=".Passcode" />
 
 </RelativeLayout>

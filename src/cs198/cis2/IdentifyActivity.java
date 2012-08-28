@@ -5,11 +5,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -24,20 +27,21 @@ public class IdentifyActivity extends Activity {
 	FileStatsDataSource datasource;
 	List<FileStats> uList;
 	FileStats df;
-	String coraltype, conflvl, path;
+	String userid, coraltype, conflvl, path;
 	Button a;
 	RadioGroup g;
 	RadioButton b;
 	Spinner c;
 	File imgFile;
+	public static final String PREFS_NAME = "MyApp_Settings";
+	SharedPreferences settings;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.identify);
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            statnumber = extras.getInt("statnumber");
-//        }
+        
+
         datasource = new FileStatsDataSource(this);
         datasource.open();
         uList = datasource.getAllEmptyFileStats();
@@ -60,9 +64,6 @@ public class IdentifyActivity extends Activity {
         spinner.setAdapter(adapter);
         
         path = Environment.getExternalStorageDirectory()+ "/" + df.getFileName();
-        //String path = "\\mnt\\sdcard\\"+df.getFileName();
-        //String path = "\\mnt\\sdcard\\1.jpg";
-        //Toast.makeText(this, path, Toast.LENGTH_LONG).show();
         imgFile = new File(path);
         if(imgFile.exists())
         {
@@ -84,11 +85,17 @@ public class IdentifyActivity extends Activity {
                 // Now you can get the text or whatever you want from the "selected" radio button
                 c = (Spinner) findViewById(R.id.spinner1);
             	b = (RadioButton) findViewById(selected);
+            	
+                settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            	userid = settings.getString("userid", null);
             	coraltype = b.getText().toString();
             	conflvl = c.getSelectedItem().toString();
+            	
+            	df.setUserId(userid);
             	df.setType(coraltype);
             	df.setConf(conflvl);
             	datasource.updateFileStat(df);	
+            	
             	uList = datasource.getAllEmptyFileStats();
         		if (uList.size() == 0){
         	        Intent myIntent = new Intent(IdentifyActivity.this, CsvActivity.class);

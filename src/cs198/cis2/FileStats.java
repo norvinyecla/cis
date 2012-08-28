@@ -2,6 +2,7 @@ package cs198.cis2;
 
 public class FileStats {
 	  private long id;
+	  private String userid;
 	  private String filename;
 	  private String type;
 	  private String conf;
@@ -12,6 +13,14 @@ public class FileStats {
 
 	  public void setId(long id) {
 	    this.id = id;
+	  }
+	  
+	  public String getUserId() {
+		    return userid;
+	  }
+
+	  public void setUserId(String userid) {
+	    this.userid = userid;
 	  }
 
 	  public String getFileName() {
@@ -41,6 +50,6 @@ public class FileStats {
 	  // Will be used by the ArrayAdapter in the ListView
 	  @Override
 	  public String toString() {
-	    return id+".jpg "+type+" "+conf;
+	    return userid+" "+id+".jpg "+type+" "+conf;
 	  }
 	} 

@@ -9,6 +9,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
   public static final String TABLE_FILESTATS = "filestats";
   public static final String COLUMN_ID = "_id";
+  public static final String COLUMN_USERID = "userid";
   public static final String COLUMN_FILENAME = "filename";
   public static final String COLUMN_TYPE = "type";
   public static final String COLUMN_CONF = "conf";
@@ -17,7 +18,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
   // Database creation sql statement
   private static final String DATABASE_CREATE = "create table "
-      + TABLE_FILESTATS + "(" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_FILENAME + " text unique not null, " + 
+      + TABLE_FILESTATS + "(" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_USERID + " text not null, " + COLUMN_FILENAME + " text unique not null, " + 
 		  COLUMN_TYPE + " text not null, "+ COLUMN_CONF + " text not null);";
   private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "+TABLE_FILESTATS;
   public MySQLiteHelper(Context context) {

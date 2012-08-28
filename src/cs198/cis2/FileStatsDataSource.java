@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 	
 	public class FileStatsDataSource {
 	
@@ -17,14 +18,14 @@ import android.database.sqlite.SQLiteDatabase;
 	  
 	  public static final String TABLE_FILESTATS = "filestats";
 	  public static final String COLUMN_ID = "_id";
+	  public static final String COLUMN_USERID = "userid";
 	  public static final String COLUMN_FILENAME = "filename";
 	  public static final String COLUMN_TYPE = "type";
 	  public static final String COLUMN_CONF = "conf";
 	  private static final String DATABASE_NAME = "filestats.db";
 	  private static final int DATABASE_VERSION = 1;
 	
-	  private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-	      MySQLiteHelper.COLUMN_FILENAME, MySQLiteHelper.COLUMN_TYPE, MySQLiteHelper.COLUMN_CONF };
+	  private String[] allColumns = { MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_USERID, MySQLiteHelper.COLUMN_FILENAME, MySQLiteHelper.COLUMN_TYPE, MySQLiteHelper.COLUMN_CONF };
 	
 	  public FileStatsDataSource(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
@@ -44,14 +45,13 @@ import android.database.sqlite.SQLiteDatabase;
 	
 	  public FileStats createFileStat(String filename) {
 	    ContentValues values = new ContentValues();
+	    values.put(MySQLiteHelper.COLUMN_USERID, "none");
 	    values.put(MySQLiteHelper.COLUMN_FILENAME, filename);
 	    values.put(MySQLiteHelper.COLUMN_TYPE, "none");
 	    values.put(MySQLiteHelper.COLUMN_CONF, "none");
 	    
-	    long insertId = database.insert(MySQLiteHelper.TABLE_FILESTATS, null,
-	    values);
-	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS,
-	    allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
+	    long insertId = database.insert(MySQLiteHelper.TABLE_FILESTATS, null, values);
+	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
 	    cursor.moveToFirst();
 	    FileStats newFileStat = cursorToFileStats(cursor);
 	    cursor.close();
@@ -61,6 +61,7 @@ import android.database.sqlite.SQLiteDatabase;
 	  public int updateFileStat(FileStats x)
 	  {
 	   ContentValues cv=new ContentValues();
+	   cv.put(COLUMN_USERID, x.getUserId());
 	   cv.put(COLUMN_FILENAME, x.getFileName());
 	   cv.put(COLUMN_TYPE, x.getType());
 	   cv.put(COLUMN_CONF, x.getConf());
@@ -75,8 +76,12 @@ import android.database.sqlite.SQLiteDatabase;
 	  
 	  public List<FileStats> getAllEmptyFileStats() {
 		  	List<FileStats> emptyfilestats = new ArrayList<FileStats>();
-		  	String db_query = "select * from "+ TABLE_FILESTATS + " where "+COLUMN_TYPE+" = ?";//and "+COLUMN_CONF+" = ?"; 
-		  	Cursor cursor = database.rawQuery(db_query, new String[] { "none" });
+		  	 Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, 
+                     MySQLiteHelper.COLUMN_CONF +"=?" +" AND " + MySQLiteHelper.COLUMN_TYPE +"=?", 
+                     new String[] {"none", "none" }, 
+                     null, null, null);
+		  	//Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, MySQLiteHelper.COLUMN_USERID+"=none", null, null, null, null);
+		  	Log.e("norvin", "there are "+cursor.getCount()+"rows");
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
 			  FileStats f = cursorToFileStats(cursor);
@@ -91,9 +96,7 @@ import android.database.sqlite.SQLiteDatabase;
 	  public List<FileStats> getAllFileStats() {
 		  List<FileStats> filestats = new ArrayList<FileStats>();
 	
-	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS,
-	        allColumns, null, null, null, null, null);
-	
+	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, null, null, null, null, null);
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
 	      FileStats f = cursorToFileStats(cursor);
@@ -108,9 +111,10 @@ import android.database.sqlite.SQLiteDatabase;
 	  private FileStats cursorToFileStats(Cursor cursor) {
 	    FileStats filestat = new FileStats();
 	    filestat.setId(cursor.getLong(0));
-	    filestat.setFileName(cursor.getString(1));
-	    filestat.setType(cursor.getString(2));
-	    filestat.setConf(cursor.getString(3));
+	    filestat.setUserId(cursor.getString(1));
+	    filestat.setFileName(cursor.getString(2));
+	    filestat.setType(cursor.getString(3));
+	    filestat.setConf(cursor.getString(4));
 	    return filestat;
 	  }
 	} 

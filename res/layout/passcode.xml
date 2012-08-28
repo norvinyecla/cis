@@ -3,13 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <EditText
+        android:id="@+id/PasscodeBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
     <TextView
         android:id="@+id/SecondLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="40dp"
         android:text="CIS"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -17,20 +26,10 @@
         android:id="@+id/PasscodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/SecondLabel"
-        android:layout_below="@+id/SecondLabel"
-        android:layout_marginTop="154dp"
+        android:layout_below="@+id/PasscodeBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
         android:onClick=".IdentifyActivity"
         android:text="OK" />
-
-    <EditText
-        android:id="@+id/PasscodeBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SecondLabel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
-        android:ems="10"
-        android:inputType="textPassword" />
 
 </RelativeLayout>
