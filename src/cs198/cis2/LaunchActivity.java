@@ -1,11 +1,18 @@
 package cs198.cis2;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -16,6 +23,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.ByteArrayBuffer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +51,10 @@ public class LaunchActivity extends Activity {
 	SharedPreferences settings;
 	String[] a;
 	String userid;
-
+	URL url;
+	ByteArrayBuffer baf;
+	InputStream is;
+	BufferedInputStream bis = new BufferedInputStream(is);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +88,68 @@ public class LaunchActivity extends Activity {
             	}
             }
           });
+        String[] d = DownloadImages.download();
+        int i;
+        for (i = 0; i < d.length; i++){
+	        URL url = null;
+			try {
+				url = new URL ("http://10.0.2.2/androidbackend/images/"+d[i]);
 
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.i("norvin", "nandito sa url ang error");
+			}
+			
+			InputStream input = null;
+			try {
+				//input = url.openStream();
+				/* Open a connection to that URL. */
+		           URLConnection ucon = url.openConnection();
+
+		           /*
+		            * Define InputStreams to read from the URLConnection.
+		            */
+		           is = ucon.getInputStream();
+		           bis = new BufferedInputStream(is);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+	            
+
+	        	/*
+	             * Read bytes to the Buffer until there is nothing more to read(-1).
+	             */
+	            ByteArrayBuffer baf = new ByteArrayBuffer(5000);
+	            int current = 0;
+	            while ((current = bis.read()) != -1) {
+	               baf.append((byte) current);
+	            }
+	            
+	            /* Convert the Bytes read to a String. */
+	            //The sdcard directory e.g. '/sdcard' can be used directly, or 
+	            //more safely abstracted with getExternalStorageDirectory()
+	            File storagePath = Environment.getExternalStorageDirectory();
+	            FileOutputStream fos = new FileOutputStream(new File(storagePath,d[i]));
+	            fos.write(baf.toByteArray());
+	            fos.flush();
+	            fos.close();
+	            //Log.d("DownloadManager", "download ready in" + ((System.currentTimeMillis() - startTime) / 1000) + " sec");
+
+	        } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	     
+	    }
+	     
+       }}
         
-        
-    }
+    
     
     
     
    
-}
+

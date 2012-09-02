@@ -35,6 +35,7 @@ public class IdentifyActivity extends Activity {
 	File imgFile;
 	public static final String PREFS_NAME = "MyApp_Settings";
 	SharedPreferences settings;
+	Intent myIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,15 +99,16 @@ public class IdentifyActivity extends Activity {
             	
             	uList = datasource.getAllEmptyFileStats();
         		if (uList.size() == 0){
-        	        Intent myIntent = new Intent(IdentifyActivity.this, CsvActivity.class);
-                	IdentifyActivity.this.startActivity(myIntent);
-                	IdentifyActivity.this.finish();    			
+        	        myIntent = new Intent(IdentifyActivity.this, CsvActivity.class);
+                	 			
         		}
         		else {
-        			Intent myIntent = new Intent(IdentifyActivity.this, IdentifyActivity.class);
-	            	IdentifyActivity.this.startActivity(myIntent);
-	            	IdentifyActivity.this.finish();
+        			myIntent = new Intent(IdentifyActivity.this, IdentifyActivity.class);
+	            	
         		}
+        		datasource.close();
+        		IdentifyActivity.this.startActivity(myIntent);
+            	IdentifyActivity.this.finish();   
             }
             
           
