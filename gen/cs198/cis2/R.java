@@ -22,13 +22,13 @@ public final class R {
         public static final int LinearLayout01=0x7f080006;
         public static final int PasscodeBox=0x7f080011;
         public static final int PasscodeButton=0x7f080013;
-        public static final int PasswordBox=0x7f080000;
         public static final int RelativeLayout01=0x7f080005;
         public static final int SecondLabel=0x7f080012;
         public static final int button1=0x7f08000f;
         public static final int emailBox=0x7f080001;
         public static final int imageView1=0x7f080007;
         public static final int menu_settings=0x7f080014;
+        public static final int passwordBox=0x7f080000;
         public static final int radio0=0x7f080009;
         public static final int radio1=0x7f08000a;
         public static final int radio2=0x7f08000b;

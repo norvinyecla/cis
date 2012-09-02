@@ -40,9 +40,8 @@ public class CsvActivity extends Activity {
         this.upload_Button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	//String email = emailfield.getText().toString();
-            	//String password = passwordfield.getText().toString(); //getPasswordfield().getText().toString();
-            	//datasource.drop();
-            	//File b = new File(Environment.getExternalStorageDirectory()+"/labels.csv");
+            	// login once 
+
             	getApplicationContext().deleteDatabase(DATABASE_NAME);
             	//b.delete();
             	//Intent myIntent = new Intent(CsvActivity.this, .class);
@@ -64,16 +63,12 @@ public class CsvActivity extends Activity {
         	f.delete();
         }
         
-//        try{
-//            // Create file 
-//            fstream = new FileWriter(Environment.getExternalStorageDirectory()+"/labels.csv", false);
-//            out = new BufferedWriter(fstream);
-//            out.write("filename,type,conf\n");
-//            //Close the output stream
-//            out.close();
-//            }catch (Exception e){//Catch exception if any
-//              System.err.println("Error: " + e.getMessage());
-//            }
+        try{
+            // Create file 
+            fstream = new FileWriter(Environment.getExternalStorageDirectory()+"/labels.csv", false);
+            }catch (Exception e){//Catch exception if any
+              System.err.println("Error: " + e.getMessage());
+            }
 //        
         for (ctr = 0; ctr < cList.size(); ctr++){
         	FileStats f = cList.get(ctr);
