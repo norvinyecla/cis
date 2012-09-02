@@ -93,7 +93,7 @@ public class LaunchActivity extends Activity {
         for (i = 0; i < d.length; i++){
 	        URL url = null;
 			try {
-				url = new URL ("http://10.0.2.2/androidbackend/images/"+d[i]);
+				url = new URL ("http://10.0.2.2/CS198/androidbackend/images/"+d[i]);
 
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

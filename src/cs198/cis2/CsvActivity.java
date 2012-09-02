@@ -92,9 +92,10 @@ public class CsvActivity extends Activity {
         	} catch (IOException e) {
         	    //oh noes!
         	}
-//        	String path = Environment.getExternalStorageDirectory()+ "/" + f.getFileName();
-//        	File a = new File(path);
-//        	a.delete();
+        	
+        	String path = Environment.getExternalStorageDirectory()+ "/" + f.getFileName();
+        	File a = new File(path);
+        	a.delete();
         	Uploader u = new Uploader();
         	u.upload();
         }
