@@ -21,6 +21,7 @@ import android.util.Log;
 
 public class FetchData {
     static InputStream is;
+    static String phpfetch = "http://10.0.2.2/CS198/androidbackend/fetch_data.php";
     public static String[] fetch(String username, String password) {
     	String[] val = {"false", "false", "false"};
         String result = "";
@@ -28,11 +29,11 @@ public class FetchData {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("username", username));
         nameValuePairs.add(new BasicNameValuePair("password", password));
-
+        
         //http post
         try{
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://10.0.2.2/CS198/vin/fetch_data.php");
+                HttpPost httppost = new HttpPost(phpfetch);
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost); 
                 HttpEntity entity = response.getEntity();

@@ -128,7 +128,7 @@ public class CsvActivity extends Activity {
         	inputStream = null;
 
         	pathToOurFile = (new File(Environment.getExternalStorageDirectory(), "labels.csv")).getAbsolutePath();
-        	urlServer = "http://10.0.2.2/CS198/vin/upload_csv.php";
+        	urlServer = "http://10.0.2.2/CS198/androidbackend/upload_csv.php";
         	lineEnd = "\r\n";
         	twoHyphens = "--";
         	boundary =  "*****";
