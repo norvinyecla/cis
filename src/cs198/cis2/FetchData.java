@@ -21,7 +21,10 @@ import android.util.Log;
 
 public class FetchData {
     static InputStream is;
-    static String phpfetch = "http://10.0.2.2/CS198/androidbackend/fetch_data.php";
+    static String ipadd =  "192.168.60.49"; // wifi ComSci
+    // static String ipadd = "192.168.32.1"; // usb
+    // static String ipadd = "10.0.2.2"; // emulator  
+    static String phpfetch = "http://"+ipadd+"/CS198/androidbackend/fetch_data.php";
     public static String[] fetch(String username, String password) {
     	String[] val = {"false", "false", "false"};
         String result = "";

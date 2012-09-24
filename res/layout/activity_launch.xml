@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/splash" >
 
     <EditText
         android:id="@+id/passwordBox"
@@ -12,7 +13,7 @@
         android:layout_marginTop="160dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/password" />
+         />
 
     <EditText
         android:id="@+id/emailBox"
@@ -21,8 +22,7 @@
         android:layout_alignBottom="@+id/passwordBox"
         android:layout_alignLeft="@+id/passwordBox"
         android:layout_marginBottom="57dp"
-        android:ems="10"
-        android:inputType="textEmailAddress">
+        android:ems="10">
         
         <requestFocus />
     </EditText>

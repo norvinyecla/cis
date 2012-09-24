@@ -41,14 +41,14 @@ public class Passcode extends Activity {
 
 		}
         settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);        
-        if (datasource.getAllFileStats().size() == 0){
-	        int n = filenames.length;
-	        int ctr = 0;
-	        for (ctr = 0; ctr < n; ctr++){
-	        	f = datasource.createFileStat(filenames[ctr]);
-	        }
-	        datasource.close();
+   
+        int n = filenames.length;
+        int ctr = 0;
+        for (ctr = 0; ctr < n; ctr++){
+        	f = datasource.createFileStat(filenames[ctr]);
         }
+        datasource.close();
+        
         
         
         Button q = (Button) findViewById(R.id.PasscodeButton);

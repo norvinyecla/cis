@@ -20,6 +20,9 @@ import android.util.Log;
 public class DownloadImages {
     static InputStream is;
     static JSONArray jArray;
+    static String ipadd =  "192.168.60.49"; // wifi ComSci
+    // static String ipadd = "192.168.32.1"; // usb
+    // static String ipadd = "10.0.2.2"; // emulator 
     public static String[] download() {
     	String filename[] = {""};
       	ArrayList<String> fileList = new ArrayList<String>();
@@ -33,7 +36,7 @@ public class DownloadImages {
         //http post
         try{
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://10.0.2.2/CS198/androidbackend/get_image.php");
+                HttpPost httppost = new HttpPost("http://"+ipadd+"/CS198/androidbackend/get_image.php");
                 //httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost); 
                 HttpEntity entity = response.getEntity();

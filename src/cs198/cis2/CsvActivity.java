@@ -36,6 +36,9 @@ public class CsvActivity extends Activity {
 	File f;
 	FileWriter fstream;
     BufferedWriter out ;
+    static String ipadd =  "192.168.60.49"; // wifi ComSci
+    // static String ipadd = "192.168.32.1"; // usb
+    // static String ipadd = "10.0.2.2"; // emulator 
     private static final String DATABASE_NAME = "filestats.db";
     public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_FILENAME = "filename";
@@ -126,9 +129,9 @@ public class CsvActivity extends Activity {
     		connection = null;
         	outputStream = null;
         	inputStream = null;
-
+        	
         	pathToOurFile = (new File(Environment.getExternalStorageDirectory(), "labels.csv")).getAbsolutePath();
-        	urlServer = "http://10.0.2.2/CS198/androidbackend/upload_csv.php";
+        	urlServer = "http://"+ipadd+"/CS198/androidbackend/upload_csv.php";
         	lineEnd = "\r\n";
         	twoHyphens = "--";
         	boundary =  "*****";

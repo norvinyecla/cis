@@ -1,6 +1,7 @@
 	package cs198.cis2;
 	
-	import java.util.ArrayList;
+	import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -33,6 +34,7 @@ import android.util.Log;
 	
 	  public void open() throws SQLException {
 	    database = dbHelper.getWritableDatabase();
+
 	  }
 	
 	  public void close() {
