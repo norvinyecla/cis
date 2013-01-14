@@ -5,18 +5,21 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -36,9 +39,15 @@ public class CsvActivity extends Activity {
 	File f;
 	FileWriter fstream;
     BufferedWriter out ;
-    static String ipadd =  "192.168.60.49"; // wifi ComSci
-    // static String ipadd = "192.168.32.1"; // usb
-    // static String ipadd = "10.0.2.2"; // emulator 
+	public static final String PREFS_NAME = "MyApp_Settings";
+	SharedPreferences settings;
+    //static String ipadd =  "10.40.93.103"; // wifi CVMIG
+    //static String ipadd =  "192.168.60.49"; // wifi ComSci
+    //static String ipadd = "http://192.168.32.1/CS198/androidbackend"; // usb
+    //static String ipadd = "10.0.2.2/CS198/androidbackend"; // emulator
+    static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online  
+    //..static String ipadd = "http://192.168.0.114/CS198/androidbackend"; // usb
+    
     private static final String DATABASE_NAME = "filestats.db";
     public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_FILENAME = "filename";
@@ -52,6 +61,7 @@ public class CsvActivity extends Activity {
         datasource = new FileStatsDataSource(this);
         datasource.open();
         cList = datasource.getAllFileStats();
+        datasource.close();
         this.upload_Button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	//String email = emailfield.getText().toString();
@@ -61,6 +71,13 @@ public class CsvActivity extends Activity {
             	//b.delete();
             	//Intent myIntent = new Intent(CsvActivity.this, .class);
             	//CsvActivity.this.startActivity(myIntent);
+            	Uploader u = new Uploader();
+            	u.upload();
+                datasource.close();
+        		settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); 
+                Editor editor = settings.edit();
+                editor.putString("done", "true");
+                editor.commit();
             	CsvActivity.this.finish();
             }
           });
@@ -99,10 +116,8 @@ public class CsvActivity extends Activity {
         	String path = Environment.getExternalStorageDirectory()+ "/" + f.getFileName();
         	File a = new File(path);
         	a.delete();
-        	Uploader u = new Uploader();
-        	u.upload();
+        	
         }
-  
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,7 +146,7 @@ public class CsvActivity extends Activity {
         	inputStream = null;
         	
         	pathToOurFile = (new File(Environment.getExternalStorageDirectory(), "labels.csv")).getAbsolutePath();
-        	urlServer = "http://"+ipadd+"/CS198/androidbackend/upload_csv.php";
+        	urlServer = ipadd+"/upload_csv.php";
         	lineEnd = "\r\n";
         	twoHyphens = "--";
         	boundary =  "*****";
@@ -189,6 +204,17 @@ public class CsvActivity extends Activity {
     	fileInputStream.close();
     	outputStream.flush();
     	outputStream.close();
+    	
+    	String parse = ipadd+"/parse_csv.php";
+    	URL url2 = new URL(parse);
+    	
+//    	connection.setDoInput(true);
+//    	connection.setDoOutput(true);
+//    	connection = (HttpURLConnection) url2.openConnection();
+    	HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(parse);
+        HttpResponse response = httpclient.execute(httppost); 
+    	Log.i("norvin4", "done");
     	}
     	catch (Exception ex)
     	{

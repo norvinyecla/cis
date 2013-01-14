@@ -46,9 +46,11 @@ public class LaunchActivity extends Activity {
 	private Button continueButton;
 	private  EditText emailfield;
 	private EditText passwordfield;
-    static String ipadd =  "192.168.60.49"; // wifi ComSci
+	//static String ipadd =  "10.40.93.103"; // wifi CVMIG
+    //static String ipadd =  "192.168.60.49"; // wifi ComSci
     // static String ipadd = "192.168.32.1"; // usb
-    // static String ipadd = "10.0.2.2"; // emulator 
+     //static String ipadd = "10.0.2.2"; // emulator 
+    static String ipadd = "http://cis.p.ht"; // hotstinger online  
 	public static final String PREFS_NAME = "MyApp_Settings";
 	SharedPreferences settings;
 	String[] a;
@@ -95,7 +97,7 @@ public class LaunchActivity extends Activity {
                     for (i = 0; i < d.length; i++){
             	        URL url = null;
             			try {
-            				url = new URL ("http://"+ipadd+"/CS198/androidbackend/images/"+d[i]);
+            				url = new URL (ipadd+"/images/"+d[i]);
 
             			} catch (MalformedURLException e) {
             				// TODO Auto-generated catch block

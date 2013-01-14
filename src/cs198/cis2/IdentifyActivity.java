@@ -6,13 +6,11 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -21,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import cs198.cis2.R;
 
 public class IdentifyActivity extends Activity {
 	int statnumber, selected;
@@ -36,25 +35,28 @@ public class IdentifyActivity extends Activity {
 	public static final String PREFS_NAME = "MyApp_Settings";
 	SharedPreferences settings;
 	Intent myIntent;
-
+	String[] filenames;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.identify);
         
-
+        
         datasource = new FileStatsDataSource(this);
         datasource.open();
         uList = datasource.getAllEmptyFileStats();
+		
 		if (uList.size() > 0){
 	        df = uList.get(0);
         }
 		else {
+			datasource.close();
 			Intent myIntent = new Intent(IdentifyActivity.this, CsvActivity.class);
         	IdentifyActivity.this.startActivity(myIntent);
         	IdentifyActivity.this.finish();
 			
 		}
+		
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

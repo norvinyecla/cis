@@ -81,8 +81,7 @@ import android.util.Log;
 		  	 Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, 
                      MySQLiteHelper.COLUMN_CONF +"=?" +" AND " + MySQLiteHelper.COLUMN_TYPE +"=?", 
                      new String[] {"none", "none" }, 
-                     null, null, null);
-		  	//Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, MySQLiteHelper.COLUMN_USERID+"=none", null, null, null, null);
+                     null, null, null);		  	
 		  	Log.e("norvin", "there are "+cursor.getCount()+"rows");
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
@@ -99,6 +98,7 @@ import android.util.Log;
 		  List<FileStats> filestats = new ArrayList<FileStats>();
 	
 	    Cursor cursor = database.query(MySQLiteHelper.TABLE_FILESTATS, allColumns, null, null, null, null, null);
+	    //Cursor cursor = database.rawQuery("SELECT * FROM " + MySQLiteHelper.TABLE_FILESTATS, null);
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
 	      FileStats f = cursorToFileStats(cursor);

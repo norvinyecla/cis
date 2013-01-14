@@ -17,14 +17,10 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class DownloadImages {
+public class DownloadImagesActivity {
     static InputStream is;
     static JSONArray jArray;
-    //static String ipadd =  "10.40.93.103"; // wifi CVMIG
-    //static String ipadd =  "192.168.60.49"; // wifi ComSci
-    // static String ipadd = "192.168.32.1"; // usb
-    // static String ipadd = "10.0.2.2"; // emulator
-    static String ipadd = "http://cis.p.ht"; // hotstinger online  
+    static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online
     public static String[] download() {
     	String filename[] = {""};
       	ArrayList<String> fileList = new ArrayList<String>();
