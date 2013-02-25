@@ -22,5 +22,7 @@
     <string name="title_activity_csv">CsvActivity</string>
     <string name="title_activity_welcome">Corals!</string>
     <string name="title_activity_image_dler">ImageDLerActivity</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <string name="title_activity_change_pass">Change Password</string>
 
 </resources>

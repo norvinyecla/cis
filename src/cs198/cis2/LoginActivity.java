@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
             		editor.putString("pin", a[2]);
             		editor.commit();           		
             		//Toast.makeText(getApplicationContext(), "name: "+a[0]+" password: "+a[1], Toast.LENGTH_SHORT).show();
-            		Intent myIntent = new Intent(LoginActivity.this, ImageDLerActivity.class);
+            		Intent myIntent = new Intent(LoginActivity.this, OptionsActivity.class);
 	            	LoginActivity.this.startActivity(myIntent);
 	            	LoginActivity.this.finish();
             	}

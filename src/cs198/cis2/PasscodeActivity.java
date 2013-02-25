@@ -37,14 +37,13 @@ public class PasscodeActivity extends Activity {
         datasource.open();
         USERNAME = settings.getString("userid", null);
         PINCODE = settings.getString("pin", null);
-    	        TextView r = (TextView) findViewById(R.id.SecondLabel);
+    	TextView r = (TextView) findViewById(R.id.SecondLabel);
         r.setText("Hello, "+USERNAME+"!");
         Toast.makeText(this, settings.toString(), Toast.LENGTH_LONG).show();
         Button q = (Button) findViewById(R.id.PasscodeButton);
         q.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	EditText mEdit = (EditText) findViewById(R.id.PasscodeBox);
-            	
             	if (mEdit.getText().toString().equals(PINCODE) ){
             		Toast.makeText(PasscodeActivity.this, "You entered the correct code!", Toast.LENGTH_SHORT).show();
             		datasource.close();           		

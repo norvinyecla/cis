@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/origPassBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:ems="10"
+        android:inputType="number"
+        android:password="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/newPassBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/origPassBox"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="number"
+        android:password="true" />
+
+    <EditText
+        android:id="@+id/newPassBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newPassBox1"
+        android:layout_below="@+id/newPassBox1"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:inputType="number"
+        android:password="true" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/newPassBox2"
+        android:layout_below="@+id/newPassBox1"
+        android:layout_marginTop="28dp"
+        android:text="Enter New Passcode Again"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newPassBox1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="Enter New Passcode"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/origPassBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:text="Enter Original Passcode"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newPassBox2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Change Password" />
+
+</RelativeLayout>
