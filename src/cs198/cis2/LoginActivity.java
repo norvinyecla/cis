@@ -37,7 +37,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        //Toast.makeText(this, "username = "+settings.getString("username", null)+" password = "+(settings.getString("password", null)), Toast.LENGTH_SHORT).show();
         continueButton =  (Button) findViewById(R.id.FirstButton);
         emailfield = (EditText) findViewById(R.id.emailBox);
         passwordfield = ((EditText) findViewById(R.id.passwordBox));
@@ -68,7 +67,6 @@ public class LoginActivity extends Activity {
             		editor.putString("userid", a[0]);
             		editor.putString("pin", a[1]);
             		editor.commit();           		
-            		//Toast.makeText(getApplicationContext(), "name: "+a[0]+" password: "+a[1], Toast.LENGTH_SHORT).show();
             		Intent myIntent = new Intent(LoginActivity.this, OptionsActivity.class);
 	            	LoginActivity.this.startActivity(myIntent);
 	            	LoginActivity.this.finish();
