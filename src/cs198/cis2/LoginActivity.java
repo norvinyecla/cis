@@ -66,8 +66,7 @@ public class LoginActivity extends Activity {
             		
             	    editor.clear();
             		editor.putString("userid", a[0]);
-            		editor.putString("password", a[1]);
-            		editor.putString("pin", a[2]);
+            		editor.putString("pin", a[1]);
             		editor.commit();           		
             		//Toast.makeText(getApplicationContext(), "name: "+a[0]+" password: "+a[1], Toast.LENGTH_SHORT).show();
             		Intent myIntent = new Intent(LoginActivity.this, OptionsActivity.class);

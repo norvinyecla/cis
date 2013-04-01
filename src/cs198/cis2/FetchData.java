@@ -30,13 +30,13 @@ public class FetchData {
     static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // usb
     
     static String phpfetch = ipadd+"/fetch_data.php";
-    public static String[] fetch(String username, String password) {
+    public static String[] fetch(String username, String pin) {
     	String[] val = {"false", "false", "false"};
         String result = "";
         //the user data to send
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("username", username));
-        nameValuePairs.add(new BasicNameValuePair("password", password));
+        nameValuePairs.add(new BasicNameValuePair("password", pin));
         
         //http post
         try{
@@ -77,12 +77,10 @@ public class FetchData {
 	            JSONArray jArray = new JSONArray(result);
                 JSONObject json_data = jArray.getJSONObject(0);
                 Log.i("log_tag","username: "+json_data.getString("username")+
-                		", password: "+json_data.getString("password")+
                         ", pin: "+json_data.getInt("pin")
                 );
                 val[0] = json_data.getString("username");
-                val[1] = json_data.getString("password");
-                val[2] = Integer.toString(json_data.getInt("pin"));
+                val[1] = Integer.toString(json_data.getInt("pin"));
 
         }catch(JSONException e){
         		Log.e("log_tag", "Error parsing data "+e.toString());
