@@ -31,12 +31,12 @@ public class FetchData {
     
     static String phpfetch = ipadd+"/fetch_data.php";
     public static String[] fetch(String username, String pin) {
-    	String[] val = {"false", "false", "false"};
+    	String[] val = {"false", "false"};
         String result = "";
         //the user data to send
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("username", username));
-        nameValuePairs.add(new BasicNameValuePair("password", pin));
+        nameValuePairs.add(new BasicNameValuePair("pin", pin));
         
         //http post
         try{
