@@ -3,7 +3,7 @@
     <string name="app_name">CIIS</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">Coral Id and Info. System</string>
+    <string name="title_activity_main">CIIS</string>
     <string name="title_activity_identify">Identify</string>
     <string name="title_activity_launch">Login</string>
 
