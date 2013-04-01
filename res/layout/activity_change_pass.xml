@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/passcode" >
 
     <EditText
         android:id="@+id/origPassBox"
@@ -13,7 +14,6 @@
         android:ems="10"
         android:inputType="number"
         android:password="true" >
-
         <requestFocus />
     </EditText>
 
