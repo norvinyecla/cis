@@ -54,8 +54,6 @@ public class ChangePassActivity extends Activity {
             		if (isNewMatches){
             			// enter call PHP code
             			
-            	        String result = "";
-            	        
             	        //the user data to send
             	        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             	        nameValuePairs.add(new BasicNameValuePair("username", USERNAME));
