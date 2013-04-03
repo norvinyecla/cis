@@ -27,7 +27,8 @@ public class FetchData {
     //static String ipadd = "10.0.2.2"; // emulator
     //static String ipadd = "10.0.2.2/CS198/androidbackend"; // emulator  
     //static String ipadd = "http://192.168.0.114/CS198/androidbackend"; // usb
-    static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // usb
+    //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // usb
+    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
     
     static String phpfetch = ipadd+"/fetch_data.php";
     public static String[] fetch(String username, String pin) {

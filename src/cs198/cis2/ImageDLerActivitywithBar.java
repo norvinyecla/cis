@@ -39,7 +39,9 @@ public class ImageDLerActivitywithBar extends Activity {
     String[] filenames = {};
     ProgressDialog progressDialog;
     static String[] d;
-    static String ipadd = "http://cis.p.ht/CS198/androidbackend"; 
+    //static String ipadd = "http://cis.p.ht/CS198/androidbackend";
+    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
+    static String plainip = "http://192.168.60.22/CIIS";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class ImageDLerActivitywithBar extends Activity {
 	        String status = settings.getString("done", "start");
 	        if (status.equalsIgnoreCase("start") || status.equalsIgnoreCase("true")){
 	        	//StartDL();
+	        	d = DownloadImagesActivity.download();
 	        	new LoadViewTask().execute();  
 			}
 	        else {
@@ -129,14 +132,14 @@ public class ImageDLerActivitywithBar extends Activity {
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
                 //Set the dialog title to 'Loading...'  
                 progressDialog.setTitle("Loading...");  
-                //Set the dialog message to 'Loading application View, please wait...'  
-                progressDialog.setMessage("Loading application View, please wait...");  
+                //Set the dialog message to 'Downloading images, please wait...'  
+                progressDialog.setMessage("Downloading images, please wait...");  
                 //This dialog can't be canceled by pressing the back key  
                 progressDialog.setCancelable(false);  
                 //This dialog isn't indeterminate  
                 progressDialog.setIndeterminate(false);  
-                //The maximum number of items is 100  
-                progressDialog.setMax(100);  
+                //The maximum number of items is d.length 
+                progressDialog.setMax(d.length);  
                 //Set the current progress to zero  
                 progressDialog.setProgress(0);  
                 //Display the progress dialog  
@@ -147,22 +150,18 @@ public class ImageDLerActivitywithBar extends Activity {
             @Override  
             protected Void doInBackground(Void... params)  
             {  
-                /* This is just a code that delays the thread execution 4 times, 
-                 * during 850 milliseconds and updates the current progress. This 
-                 * is where the code that is going to be executed on a background 
-                 * thread must be placed. 
-                 */  
+
                 //try  
                 //{  
                     //Get the current thread's token  
                     synchronized (this)  
                     {  
-                    	d = DownloadImagesActivity.download();
+                    	
                 	    int i;
                 	    for (i = 0; i < d.length; i++){
                 	        URL url = null;
                 			try {
-                				url = new URL (ipadd+"/images/"+d[i]);
+                				url = new URL (plainip+"/superpixel/"+d[i]);
                 	
                 			} catch (MalformedURLException e) {
                 				// TODO Auto-generated catch block
@@ -229,9 +228,6 @@ public class ImageDLerActivitywithBar extends Activity {
         	    Editor editor = settings.edit();
         	    editor.putString("done", "false");
         	    editor.commit();
-                Intent myIntent = new Intent(ImageDLerActivitywithBar.this, IdentifyActivity.class);
-        		ImageDLerActivitywithBar.this.startActivity(myIntent);
-        		ImageDLerActivitywithBar.this.finish();
                 return null;  
             }  
       
@@ -251,6 +247,10 @@ public class ImageDLerActivitywithBar extends Activity {
                 progressDialog.dismiss();  
                 //initialize the View  
                 setContentView(R.layout.activity_image_dler);  
+                Intent myIntent = new Intent(ImageDLerActivitywithBar.this, IdentifyActivity.class);
+        		ImageDLerActivitywithBar.this.startActivity(myIntent);
+        		ImageDLerActivitywithBar.this.finish();
+
             }  
         }  
     

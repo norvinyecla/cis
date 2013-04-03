@@ -20,7 +20,8 @@ import android.util.Log;
 public class DownloadImagesActivity {
     static InputStream is;
     static JSONArray jArray;
-    static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online
+    //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online
+    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
     public static String[] download() {
     	String filename[] = {""};
       	ArrayList<String> fileList = new ArrayList<String>();

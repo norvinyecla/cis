@@ -39,7 +39,7 @@ public class PasscodeActivity extends Activity {
         PINCODE = settings.getString("pin", null);
     	TextView r = (TextView) findViewById(R.id.SecondLabel);
         r.setText("Hello, "+USERNAME+"!");
-        Toast.makeText(this, settings.toString(), Toast.LENGTH_LONG).show();
+        
         Button q = (Button) findViewById(R.id.PasscodeButton);
         q.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -47,7 +47,7 @@ public class PasscodeActivity extends Activity {
             	if (mEdit.getText().toString().equals(PINCODE) ){
             		Toast.makeText(PasscodeActivity.this, "You entered the correct code!", Toast.LENGTH_SHORT).show();
             		datasource.close();           		
-	            	Intent myIntent = new Intent(PasscodeActivity.this, ImageDLerActivity.class);
+	            	Intent myIntent = new Intent(PasscodeActivity.this, ImageDLerActivitywithBar.class);
 	            	//myIntent.putExtra("statnumber",fid);
 	            	PasscodeActivity.this.startActivity(myIntent);
 	            	PasscodeActivity.this.finish();

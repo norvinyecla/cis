@@ -122,16 +122,9 @@ public class IdentifyActivity extends Activity {
         	public void onClick(View v) {
         		Intent i = new Intent(android.content.Intent.ACTION_VIEW);
         		i.setDataAndType(Uri.parse(imgFile.toURI().toString()),"image/jpg");
-        		startActivity(i); 
-        		
+        		startActivity(i);   		
         	}
-      	  
-        });
-        
-
-        
+        });      
     }
-
-    
 }
 

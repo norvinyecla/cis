@@ -92,7 +92,7 @@ public class LaunchActivity extends Activity {
             		editor.putString("pin", a[2]);
             		editor.commit();
             		
-            		String[] d = DownloadImages.download();
+            		String[] d = DownloadImagesActivity.download();
                     int i;
                     for (i = 0; i < d.length; i++){
             	        URL url = null;
