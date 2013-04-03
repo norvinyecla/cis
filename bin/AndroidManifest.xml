@@ -45,6 +45,9 @@
         <activity
             android:name=".ImageDLerActivity"
             android:label="@string/title_activity_image_dler" >
+        </activity>        <activity
+            android:name=".ImageDLerActivitywithBar"
+            android:label="@string/title_activity_image_dler" >
         </activity>
         <activity
             android:name=".OptionsActivity"

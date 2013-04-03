@@ -14,9 +14,12 @@ import java.util.List;
 import org.apache.http.util.ByteArrayBuffer;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -34,6 +37,8 @@ public class ImageDLerActivity extends Activity {
 	SharedPreferences settings;
     FileStats f;
     String[] filenames = {};
+    ProgressDialog progressDialog;
+    static String[] d;
     static String ipadd = "http://cis.p.ht/CS198/androidbackend"; 
     
     @Override
@@ -60,6 +65,7 @@ public class ImageDLerActivity extends Activity {
 	        String status = settings.getString("done", "start");
 	        if (status.equalsIgnoreCase("start") || status.equalsIgnoreCase("true")){
 	        	StartDL();
+	        	//new LoadViewTask().execute();  
 			}
 	        else {
 	        	Intent myIntent = new Intent(ImageDLerActivity.this, CsvActivity.class);
@@ -68,21 +74,57 @@ public class ImageDLerActivity extends Activity {
 	        }
 		}//end
     }
-    
-    private void StartDL() {
-    	String[] d = DownloadImagesActivity.download();
-        int i;
-        for (i = 0; i < d.length; i++){
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_image_dler, menu);
+        return true;
+    }
+
+    class OnlyExt implements FilenameFilter{
+    	  String extn;   	 
+    	  File dir;
+    	  public OnlyExt(String extn){
+    			 this.extn="." + extn;
+    	  }
+    	  
+    	  public void setDir(File dir){
+    		  this.dir = dir;		  
+    	  }
+    	  
+    	  public boolean accept(File dir,String name){
+    		  return name.endsWith(extn);
+    	  }
+    }
+    		
+    public class FilterFiles{
+    		  
+    		public String[] filter() throws IOException{
+    		
+    		String dir = Environment.getExternalStorageDirectory().toString();
+    		String extn = "jpg";
+    		File ff = new File(dir);
+    		FilenameFilter fff = new OnlyExt(extn);
+    		String s[] = ff.list(fff);
+    		return s;
+    		}
+
+      }    
+    	
+	private void StartDL() {
+		d = DownloadImagesActivity.download();
+	    int i;
+	    for (i = 0; i < d.length; i++){
 	        URL url = null;
 			try {
 				url = new URL (ipadd+"/images/"+d[i]);
-
+	
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Log.i("norvin", "nandito sa url ang error");
 			}
-			new ProgressBar().execute(url.toString(), d[i]);
+
 			try {
 		           URLConnection ucon = url.openConnection();
 		           is = ucon.getInputStream();
@@ -116,69 +158,34 @@ public class ImageDLerActivity extends Activity {
 			} 
 	     
 	    }			
-        	DBMaker();
-	        
-	        Intent myIntent = new Intent(ImageDLerActivity.this, IdentifyActivity.class);
-			ImageDLerActivity.this.startActivity(myIntent);
-			ImageDLerActivity.this.finish();
+	    DBMaker();// creates all filestats
+	    
 	}
 
-	private void DBMaker(){
-    	FilterFiles myFilter = new FilterFiles();
-        try {
-			filenames = myFilter.filter();
-			Toast.makeText(getApplicationContext(), "number of files="+filenames.length, Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();	
-
-		}
-        int n = filenames.length;
-        int ctr = 0;
-        for (ctr = 0; ctr < n; ctr++){
-        	f = datasource.createFileStat(filenames[ctr]);
-        }
-        datasource.close();
-        Editor editor = settings.edit();
-        editor.putString("done", "false");
-        editor.commit();
+    	private void DBMaker(){
+    		FilterFiles myFilter = new FilterFiles();
+    	    try {
+    			filenames = myFilter.filter();
+    			Toast.makeText(getApplicationContext(), "number of files="+filenames.length, Toast.LENGTH_LONG).show();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();	
     	
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_image_dler, menu);
-        return true;
-    }
-
-    class OnlyExt implements FilenameFilter{
-    	  String extn;   	 
-    	  File dir;
-    	  public OnlyExt(String extn){
-    			 this.extn="." + extn;
-    	  }
-    	  
-    	  public void setDir(File dir){
-    		  this.dir = dir;		  
-    	  }
-    	  
-    	  public boolean accept(File dir,String name){
-    		  return name.endsWith(extn);
-    	  }
-    	}
-    		
-    	public class FilterFiles{
-    		  
-    		public String[] filter() throws IOException{
-    		
-    		String dir = Environment.getExternalStorageDirectory().toString();
-    		String extn = "jpg";
-    		File ff = new File(dir);
-    		FilenameFilter fff = new OnlyExt(extn);
-    		String s[] = ff.list(fff);
-    		return s;
     		}
-
-      }    
-    
+    	    int n = filenames.length;
+    	    int ctr = 0;
+    	    for (ctr = 0; ctr < n; ctr++){
+    	    	f = datasource.createFileStat(filenames[ctr]);
+    	    }
+    	    datasource.close();
+    	    Editor editor = settings.edit();
+    	    editor.putString("done", "false");
+    	    editor.commit();
+            Intent myIntent = new Intent(ImageDLerActivity.this, IdentifyActivity.class);
+    		ImageDLerActivity.this.startActivity(myIntent);
+    		ImageDLerActivity.this.finish();
+        	
+        }
+    	
+    	    
 }

@@ -25,7 +25,7 @@ public class OptionsActivity extends Activity {
         
         startButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-            	Intent myIntent = new Intent(OptionsActivity.this, ImageDLerActivity.class);
+            	Intent myIntent = new Intent(OptionsActivity.this, ImageDLerActivitywithBar.class);
             	OptionsActivity.this.startActivity(myIntent);
             	OptionsActivity.this.finish();
             }
