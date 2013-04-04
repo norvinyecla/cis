@@ -23,6 +23,6 @@
     <string name="title_activity_welcome">CIIS</string>
     <string name="title_activity_image_dler">Download Images</string>
     <string name="title_activity_options">Options</string>
-    <string name="title_activity_change_pass">Change Password</string>
+    <string name="title_activity_change_pass">Change PIN</string>
 
 </resources>

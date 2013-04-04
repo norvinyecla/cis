@@ -46,7 +46,7 @@ public class CsvActivity extends Activity {
     //static String ipadd = "http://192.168.32.1/CS198/androidbackend"; // usb
     //static String ipadd = "10.0.2.2/CS198/androidbackend"; // emulator
     //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online  
-    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
+    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
     
     private static final String DATABASE_NAME = "filestats.db";
     public static final String COLUMN_USERID = "userid";
@@ -215,15 +215,15 @@ public class CsvActivity extends Activity {
         HttpPost httppost = new HttpPost(parse);
         HttpResponse response = httpclient.execute(httppost); 
         
-    	String parse1 = ipadd+"/call_train.php";
-    	URL url21 = new URL(parse);
+    	parse = ipadd+"/call_train.php";
+    	url2 = new URL(parse);
     	
 //    	connection.setDoInput(true);
 //    	connection.setDoOutput(true);
 //    	connection = (HttpURLConnection) url2.openConnection();
-    	HttpClient httpclient1 = new DefaultHttpClient();
-        HttpPost httppost1 = new HttpPost(parse1);
-        HttpResponse response1 = httpclient.execute(httppost1); 
+    	httpclient = new DefaultHttpClient();
+    	httppost = new HttpPost(parse);
+    	response = httpclient.execute(httppost); 
     	}
     	catch (Exception ex)
     	{

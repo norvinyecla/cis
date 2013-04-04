@@ -27,7 +27,7 @@ import android.widget.Toast;
 public class ChangePassActivity extends Activity {
     Button goButton;
     //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // usb
-    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
+    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
     static String phpfetch = ipadd+"/change_password.php";
     
     InputStream is;

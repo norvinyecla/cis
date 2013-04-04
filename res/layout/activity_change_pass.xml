@@ -45,7 +45,7 @@
         android:layout_alignRight="@+id/newPassBox2"
         android:layout_below="@+id/newPassBox1"
         android:layout_marginTop="28dp"
-        android:text="Enter New Passcode Again"
+        android:text="Enter New PIN Again"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_above="@+id/newPassBox1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Enter New Passcode"
+        android:text="Enter New PIN"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -65,7 +65,7 @@
         android:layout_alignBottom="@+id/origPassBox"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="53dp"
-        android:text="Enter Original Passcode"
+        android:text="Enter Original PIN"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -75,6 +75,6 @@
         android:layout_below="@+id/newPassBox2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="Change Password" />
+        android:text="Change PIN" />
 
 </RelativeLayout>

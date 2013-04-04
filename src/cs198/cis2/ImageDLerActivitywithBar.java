@@ -39,9 +39,8 @@ public class ImageDLerActivitywithBar extends Activity {
     String[] filenames = {};
     ProgressDialog progressDialog;
     static String[] d;
-    //static String ipadd = "http://cis.p.ht/CS198/androidbackend";
-    static String ipadd =  "http://192.168.60.22/CIIS/bin/android";
-    static String plainip = "http://192.168.60.22/CIIS";
+    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
+    static String plainip = "http://192.168.60.76/CIIS/superpixel/";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -161,8 +160,8 @@ public class ImageDLerActivitywithBar extends Activity {
                 	    for (i = 0; i < d.length; i++){
                 	        URL url = null;
                 			try {
-                				url = new URL (plainip+"/superpixel/"+d[i]);
-                	
+                				url = new URL (plainip+d[i]);
+                				//url = new URL (ipadd+"/images/"+d[i]);
                 			} catch (MalformedURLException e) {
                 				// TODO Auto-generated catch block
                 				e.printStackTrace();
