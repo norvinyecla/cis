@@ -27,16 +27,18 @@ import android.widget.Toast;
 public class ChangePassActivity extends Activity {
     Button goButton;
     //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // usb
-    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
-    static String phpfetch = ipadd+"/change_password.php";
-    
-    InputStream is;
+    String ipadd ;//=  "http://192.168.60.32/CIIS/bin/android";
+    String phpfetch;// = ipadd+"/change_password.php";
+	SharedPreferences settings;
+	InputStream is;
     public static final String PREFS_NAME = "MyApp_Settings";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pass);
-        
+        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        ipadd = settings.getString("mainurl", null);
+        phpfetch = ipadd+"/change_password.php";
         goButton = (Button) findViewById(R.id.goButton);
         
         
@@ -53,8 +55,6 @@ public class ChangePassActivity extends Activity {
             	if (isOrigCorrect){ // if old password is correct
             		
             		if (isNewMatches){
-            			// enter call PHP code
-            			
             	        //the user data to send
             	        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             	        nameValuePairs.add(new BasicNameValuePair("username", USERNAME));

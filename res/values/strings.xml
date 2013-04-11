@@ -24,5 +24,11 @@
     <string name="title_activity_image_dler">Download Images</string>
     <string name="title_activity_options">Options</string>
     <string name="title_activity_change_pass">Change PIN</string>
+    <string name="title_activity_change_ipadd">ChangeIPAdd</string>
+    <string name="enterIP">Enter New Source URL</string>
+    <string name="enterimagesource">Enter Source of Coral Images</string>
+    <string name="changeURL">Change URL Sources</string>
+    <string name="helptext">Enter the URL where you want to download the data and images. </string>
+    <string name="help">Help</string>
 
 </resources>

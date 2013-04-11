@@ -45,7 +45,8 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
             	String email = emailfield.getText().toString();
             	String password = passwordfield.getText().toString(); 
-            	a = FetchData.fetch(email, password);
+            	FetchData f = new FetchData(LoginActivity.this);
+            	a = f.fetch(email, password);
             	Editor editor = settings.edit();
             	Log.i("norvin3", a[0]);
             	if (new String(a[0]).equals("false")){

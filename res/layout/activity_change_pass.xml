@@ -39,16 +39,6 @@
         android:password="true" />
 
     <TextView
-        android:id="@+id/TextView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/newPassBox2"
-        android:layout_below="@+id/newPassBox1"
-        android:layout_marginTop="28dp"
-        android:text="Enter New PIN Again"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,5 +66,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:text="Change PIN" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newPassBox1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Enter New PIN Again"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -39,11 +39,15 @@ public class ImageDLerActivitywithBar extends Activity {
     String[] filenames = {};
     ProgressDialog progressDialog;
     static String[] d;
-    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
-    static String plainip = "http://192.168.60.76/CIIS/superpixel/";
+    String ipadd;// =  "http://192.168.60.32/CIIS/bin/android";
+    String plainip;// = "http://192.168.60.32/CIIS/superpixel";
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        ipadd = settings.getString("mainurl", null);
+        plainip = settings.getString("imageurl", null);
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_dler);
 
@@ -66,7 +70,8 @@ public class ImageDLerActivitywithBar extends Activity {
 	        String status = settings.getString("done", "start");
 	        if (status.equalsIgnoreCase("start") || status.equalsIgnoreCase("true")){
 	        	//StartDL();
-	        	d = DownloadImagesActivity.download();
+	        	DownloadImagesActivity dia = new DownloadImagesActivity(ImageDLerActivitywithBar.this);
+	        	d = dia.download();
 	        	new LoadViewTask().execute();  
 			}
 	        else {
@@ -160,7 +165,7 @@ public class ImageDLerActivitywithBar extends Activity {
                 	    for (i = 0; i < d.length; i++){
                 	        URL url = null;
                 			try {
-                				url = new URL (plainip+d[i]);
+                				url = new URL (plainip+"/"+d[i]);
                 				//url = new URL (ipadd+"/images/"+d[i]);
                 			} catch (MalformedURLException e) {
                 				// TODO Auto-generated catch block

@@ -45,7 +45,8 @@
         <activity
             android:name=".ImageDLerActivity"
             android:label="@string/title_activity_image_dler" >
-        </activity>        <activity
+        </activity>
+        <activity
             android:name=".ImageDLerActivitywithBar"
             android:label="@string/title_activity_image_dler" >
         </activity>
@@ -56,6 +57,10 @@
         <activity
             android:name=".ChangePassActivity"
             android:label="@string/title_activity_change_pass" >
+        </activity>
+        <activity
+            android:name=".ChangeIPAdd"
+            android:label="@string/title_activity_change_ipadd" >
         </activity>
     </application>
 

@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/passcode">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:text="@string/enterIP" />
+
+    <EditText
+        android:id="@+id/ipbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/imageipbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ipbox"
+        android:layout_centerVertical="true"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/savemainurl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageipbox"
+        android:layout_below="@+id/imageipbox"
+        android:layout_marginTop="36dp"
+        android:text="Save Settings" />
+
+    <Button
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/savemainurl"
+        android:layout_alignBottom="@+id/savemainurl"
+        android:layout_alignRight="@+id/imageipbox"
+        android:text="Help" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageipbox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:text="@string/enterimagesource" />
+
+</RelativeLayout>

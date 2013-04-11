@@ -41,13 +41,7 @@ public class CsvActivity extends Activity {
     BufferedWriter out ;
 	public static final String PREFS_NAME = "MyApp_Settings";
 	SharedPreferences settings;
-    //static String ipadd =  "10.40.93.103"; // wifi CVMIG
-    //static String ipadd =  "192.168.60.49"; // wifi ComSci
-    //static String ipadd = "http://192.168.32.1/CS198/androidbackend"; // usb
-    //static String ipadd = "10.0.2.2/CS198/androidbackend"; // emulator
-    //static String ipadd = "http://cis.p.ht/CS198/androidbackend"; // hotstinger online  
-    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
-    
+    String ipadd =  "http://192.168.60.32/CIIS/bin/android";
     private static final String DATABASE_NAME = "filestats.db";
     public static final String COLUMN_USERID = "userid";
 	public static final String COLUMN_FILENAME = "filename";
@@ -62,6 +56,8 @@ public class CsvActivity extends Activity {
         datasource.open();
         cList = datasource.getAllFileStats();
         datasource.close();
+        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        ipadd = settings.getString("mainurl", null);
         this.upload_Button.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	//String email = emailfield.getText().toString();

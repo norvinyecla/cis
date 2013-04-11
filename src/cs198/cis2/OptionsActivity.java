@@ -13,8 +13,8 @@ import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class OptionsActivity extends Activity {
-	Button startButton;
-    Button changePassButton;
+	Button startButton,changePassButton,changeURLButton;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class OptionsActivity extends Activity {
         
         startButton = (Button) findViewById(R.id.startButton);
         changePassButton = (Button) findViewById(R.id.changePassButton);
-        
+        changeURLButton = (Button) findViewById(R.id.changeURLButton);
         startButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	Intent myIntent = new Intent(OptionsActivity.this, ImageDLerActivitywithBar.class);
@@ -34,6 +34,14 @@ public class OptionsActivity extends Activity {
         changePassButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
             	Intent myIntent = new Intent(OptionsActivity.this, ChangePassActivity.class);
+            	OptionsActivity.this.startActivity(myIntent);
+            	OptionsActivity.this.finish();
+            }
+          });
+        
+        changeURLButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+            	Intent myIntent = new Intent(OptionsActivity.this, ChangeIPAdd.class);
             	OptionsActivity.this.startActivity(myIntent);
             	OptionsActivity.this.finish();
             }

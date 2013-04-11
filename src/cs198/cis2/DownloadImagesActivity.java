@@ -19,14 +19,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class DownloadImagesActivity {
+public class DownloadImagesActivity{
     static InputStream is;
     static JSONArray jArray;
-    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
+    static String ipadd;
+    static String parse;
+	static SharedPreferences settings;
+	Context mContext;
+
+    public static final String PREFS_NAME = "MyApp_Settings";
+    public DownloadImagesActivity(Context context) {
+        mContext = context;
+        settings = PreferenceManager.getDefaultSharedPreferences(mContext);
+    }
     public static String[] download() {
-    	String parse = ipadd+"/update_imagedb.php";
+        ipadd = settings.getString("mainurl", null);
+    	parse = ipadd+"/update_imagedb.php";
     	try {
 			URL url2 = new URL(parse);
 	    	

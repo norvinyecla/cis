@@ -17,14 +17,30 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class FetchData {
     static InputStream is;
-    static String ipadd =  "http://192.168.60.76/CIIS/bin/android";
-    
-    static String phpfetch = ipadd+"/fetch_data.php";
+	public static final String PREFS_NAME = "MyApp_Settings";
+	static SharedPreferences settings;
+	Context mContext;
+
+    public FetchData(Context context) {
+        mContext = context;
+        settings = PreferenceManager.getDefaultSharedPreferences(mContext);
+    }
     public static String[] fetch(String username, String pin) {
+        String ipadd = settings.getString("mainurl", "null");
+        if (ipadd.length() == 0 || ipadd.equals("null") ){
+        	ipadd =  "http://192.168.60.32/CIIS/bin/android";
+        } 
+        
+        
+        
+        String phpfetch = ipadd+"/fetch_data.php";
     	String[] val = {"false", "false"};
         String result = "";
         //the user data to send
